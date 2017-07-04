@@ -129,9 +129,11 @@ footer {
 }
 
 #logo {
-  width: 550px;
+  max-width: 550px;
   display: block;
   margin: 0 auto;
+  height: auto;
+  width: auto\9; /* ie8 */
 }
 
 #logo img {
