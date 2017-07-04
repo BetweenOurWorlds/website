@@ -3,19 +3,30 @@ layout: default
 ---
   <div id="introduction">
     <h2>A Linked Open Dataset with the focus on Anime</h2>
-    Between Our Worlds is an initiative to provide metadata information about Anime as Linked Open Data.
-    <span class="speach">'Wait, what is this Linked Data thingy you speak of?'</span>
-    Linked Data is a principle that ++++
-    The core contribution of our initiative a dataset, which is accessible via several human and machine-understandable methods.
+    <p>
+      Between Our Worlds is an initiative to provide metadata information about Anime as Linked Open Data.
+      <span class="speach">Wait, what is this Linked Data thingy you speak of?</span>
+      <a target="_blank" href="https://en.wikipedia.org/wiki/Linked_data">Linked Data</a>
+      is a method of publishing structured data so that it can be interlinked and
+      become more useful through <a target="_blank" href="https://en.wikipedia.org/wiki/Semantic_query">semantic queries</a>.
+      This is something you can't do if you would , for example, store your data in a relational database.
+      Furthermore, the word 'open' refers to the fact that the data is available under a free license.
+    </p>
+    <p>
+      The core contribution of our initiative is a Linked Open Dataset.
+      It is currently available by downloading the RDF <a href="{{site.url}}/data#datadump">datadump</a> or by quering our Triple Pattern Fragments <a href="{{site.url}}/data#tpf">server</a>.
+    </p>
   </div>
 
   <div id="goal">
     <h2>The dataset has as goal to</h2>
 
     <ul>
-      <li>Discoverability</li>
-      <li>Sharebility</li>
-
+      <li>provide globally unique identifiers for Anime,</li>
+      <li>use globally unique umambiguous property names,</li>
+      <li>provide a self-describing dataset for Anime metadata,</li>
+      <li>improve the discoverability of Anime-related data, and</li>
+      <li>improve the sharability of Anime-related data</li>
     </ul>
   </div>
 
@@ -23,19 +34,20 @@ layout: default
     <h2>The dataset has not as goal to</h2>
 
     <ul>
-      <li><span class="bold"> replace social/community websites and platforms</span>,
+      <li><span class="bold"> replace social and community platforms</span>,
         such as
         <a target="_blank" href="https://kitsu.io">Kitsu</a>,
         <a target="_blank" href="https://myanimelist.net/">MyAnimeList<a/>, and
         <a target="_blank" href="https://anidb.net">AniDB</a>.
-        The dataset allows to talk about a uniquely identifiable Anime, regardless of the application.
-        However, if the aforementioned websites and platforms would incorporate the Linked Data principles,
-        all of them would at any point know about which Anime they are talking and if its the same one,
-        without the need to rely on record-matching to find the same Anime.
+        The dataset allows to talk about a uniquely identifiable Anime, regardless of the platform.
+        However, if the aforementioned platforms would incorporate the Linked Data principles,
+        all of them would at any point know unambigously about which Anime they are talking,
+        without the need to rely on record-matching between platforms to find the same Anime.
       </li>
-      <li><span class="bold">be the central hub, datastore, or database for all Anime-related data out there</span>.
+      <li><span class="bold">be the central hub, datastore, or database for all Anime-related data</span>.
         The initiative is concerned with the general metadata information about Anime.
-        User and application-specific information can and should be hosted by the user and/or the used application.
+        User and application-specific data can and should be hosted by the user and/or the used application.
+        This data can in turn point to our data, using the Linked Data <a traget="_blank" href="https://www.w3.org/DesignIssues/LinkedData.html">principles</a>.
       </li>
 
     </ul>
@@ -45,6 +57,8 @@ layout: default
     <h2>Want to learn more?</h2>
     <ul>
       <li><a target="_blank" href="https://solid.github.io/understanding-linked-data">Understanding Linked Data</a> (presentation)</li>
+      <li><a target="_blank" href="https://www.w3.org/DesignIssues/LinkedData.html">Linked Data principles</a> (article)</li>
+      <li><a target="_blank" href="http://linkeddatafragments.org/concept/">Triple Pattern Fragments</a></li>
     </ul>
   </div>
 </div>
