@@ -120,6 +120,11 @@ footer {
   height: 34px;
 }
 
+footer a {
+  color: grey;
+  text-decoration: none;
+}
+
 .speach {
   font-style: italic;
 }
