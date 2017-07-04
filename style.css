@@ -14,7 +14,7 @@ html, body {
 }
 
 #main {
-  width: 1000px;
+  width: 800px;
   margin: 0 auto;
   background-color: white;
 }
@@ -76,26 +76,30 @@ html, body {
 }
 
 #title {
-  text-align: center;
-  font-family: "Brush Script MT", cursive;
-  font-size: 60px;
+  font-weight: bold;
+  color: #cd5334;
 }
 
-#title a {
+/*#title a {
   color: black;
   text-decoration: none;
-  /*color: #AF1B3F*/
+  color: #AF1B3F
   color: #4ECDC4;
-}
+}*/
 
 #subtitle {
   font-style: italic;
 }
 
+.text {
+  text-align: justify;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
 #introduction {
   margin-top: 20px;
   margin-bottom: 20px;
-  text-align: justify;
 }
 
 #goal {
