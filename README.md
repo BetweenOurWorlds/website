@@ -1,4 +1,4 @@
-![Logo of Between Our Worlds](https://github.com/pheyvaer/bow-website/blob/master/logo.png)
+![Logo of Between Our Worlds](https://github.com/pheyvaer/bow-website/blob/master/logo.png =250x)
 
 # Website of Between Our World
 
