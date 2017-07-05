@@ -1,3 +1,5 @@
+![Logo of Between Our Worlds](https://github.com/pheyvaer/bow-website/blob/master/logo.png)
+
 # Website of Between Our World
 
 The code for the website of **Between Our World**, available live at [betweenourworlds.org](https://betweenourworlds.org).
@@ -13,5 +15,5 @@ If you plan to update a larger part of the website, it's best to contact us firs
 
 ## License, copyright, and attribution
 - Original website code: MIT &copy; Between Our Worlds
-- Between Our Worlds' Logo contains an icon made by [Freepik](http://www.freepik.com/) from [www.flaticon.com](http://www.flaticon.com)
+- Between Our Worlds' logo contains an icon made by [Freepik](http://www.freepik.com/) from [www.flaticon.com](http://www.flaticon.com)
 - [github-markdown.css](https://github.com/sindresorhus/github-markdown-css): MIT &copy; [Sindre Sorhus](http://sindresorhus.com/)
