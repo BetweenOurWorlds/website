@@ -2,7 +2,7 @@
 
 # Website of Between Our Worlds
 
-The code for the website of **Between Our World**, available live at [betweenourworlds.org](https://betweenourworlds.org).
+The code for the website of **Between Our Worlds**, available live at [betweenourworlds.org](https://betweenourworlds.org).
 
 ## Requirements
 - [Jekyll](https://jekyllrb.com/)
