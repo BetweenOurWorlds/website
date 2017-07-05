@@ -1,5 +1,6 @@
 url: "https://betweenourworlds.org"
 baseurl: ""
+webid: "https://betweenourworlds.org/#org"
 
 permalink: pretty
 markdown: kramdown

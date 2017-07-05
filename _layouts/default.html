@@ -1,24 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" vocab="http://schema.org/" about="{{site.url}}" typeof="WebPage">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" property="keywords" content="Linked Data, Open Data, Linked Open Data,
+    Between Our Worlds, triples, RDF, Anime, metadata, HDT, N-Triples, Triple Pattern Fragments, Linked Data Fragments">
+
     <title>Between Our Worlds</title>
 
-    <link rel="stylesheet" href="{{site.url}}/style.css">
-    <link rel="stylesheet" href="{{site.url}}/github-markdown.css">
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans" rel="stylesheet">
+    <link rel="stylesheet" property="http://www.w3.org/ns/oa#styledBy" resource="{{site.url}}/style.css" href="{{site.url}}/style.css" typeof="http://www.w3.org/ns/oa#CssStyle">
+    <link rel="stylesheet" property="http://www.w3.org/ns/oa#styledBy" resource="{{site.url}}/github-markdown.css" href="{{site.url}}/github-markdown.css" typeof="http://www.w3.org/ns/oa#CssStyle">
+    <link rel="stylesheet" property="http://www.w3.org/ns/oa#styledBy" resource="https://fonts.googleapis.com/css?family=Lato" href="https://fonts.googleapis.com/css?family=Lato" typeof="http://www.w3.org/ns/oa#CssStyle">
+    <link rel="stylesheet" property="http://www.w3.org/ns/oa#styledBy" resource="https://fonts.googleapis.com/css?family=Alegreya+Sans" href="https://fonts.googleapis.com/css?family=Alegreya+Sans" typeof="http://www.w3.org/ns/oa#CssStyle">
 
     <script src="{{site.url}}/script.js"></script>
   </head>
   <body>
-    <div id="container">
+    <span class="hidden" property="lastReviewed dateModified" datatype="Date">{{site.time | date_to_xmlschema}}</span>
+    <span class="hidden" rel="reviewedBy creator" resource="https://pieterheyvaert.com/#me"></span>
+    <div id="container" rel="mainEntity about" resource="{{site.webid}}" typeof="Organization">
       <div id="main">
         <div id="content">
           <!-- <header><h1 id="title"><a href="/">Between Our Worlds</a></h1></header> -->
           <div id="logo">
-            <a href="/"><img src="{{site.url}}/bow-logo.png"></a>
+            <a href="/"><img property="logo" src="{{site.url}}/logo.png"></a>
           </div>
 
           <div id="nav">
