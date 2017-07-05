@@ -47,7 +47,7 @@ html, body {
 
 #nav li.selected {
   font-weight: bold;
-  background: url('wind-icon.png') no-repeat left;
+  background: url('../wind-icon.png') no-repeat left;
 
   padding-left: 10px;
   vertical-align: middle;
