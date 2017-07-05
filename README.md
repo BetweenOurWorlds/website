@@ -1,6 +1,6 @@
 <img src="https://github.com/pheyvaer/bow-website/blob/master/logo.png" alt="Logo of Between Our Worlds" width="350px">
 
-# Website of Between Our World
+# Website of Between Our Worlds
 
 The code for the website of **Between Our World**, available live at [betweenourworlds.org](https://betweenourworlds.org).
 
