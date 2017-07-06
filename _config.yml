@@ -1,6 +1,8 @@
 url: "https://betweenourworlds.org"
 baseurl: ""
 webid: "https://betweenourworlds.org/#org"
+datadumpurl: "https://datadump.betweenourworlds.org"
+tpfurl: "https://data.betweenourworlds.org"
 
 permalink: pretty
 markdown: kramdown
