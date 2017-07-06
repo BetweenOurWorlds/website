@@ -149,6 +149,21 @@ footer a {
   display: none;
 }
 
+input[type=url] {
+  width: 90%;
+}
+
+input[type=submit] {
+  border: none;
+  background-color: white;
+  color: #cd5334;
+  font-weight: bold;
+}
+
+input[type=submit]:hover {
+  cursor: pointer;
+}
+
 @media (max-width: 1110px) {
   #main {
     width: 80%;

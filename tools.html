@@ -4,4 +4,27 @@ id: tools
 ---
 <div>
   <h2>Tools</h2>
+
+  <div id="tools" class="text">
+    <div>
+      <form id="search">
+        <input id="url" type="url" name="url" placeholder="https://kitsu.io/anime/one-piece" autofocus required>
+        <input type="submit" value="Search">
+      </form>
+    </div>
+  </div>
 </div>
+
+<script>
+  document.querySelector("#search").addEventListener("submit", function(e){
+    e.preventDefault();
+    let url = document.querySelector("#url").value;
+    console.log(url);
+
+    let fragmentsClient = window.ldf.FragmentsClient('{{site.tpfurl}}/2017-07');
+
+    let query = `SELECT * { ?s ?p "${url}"^^<http://schema.org/URL>} LIMIT 100`,
+      results = new ldf.SparqlIterator(query, { fragmentsClient: fragmentsClient });
+    results.on('data', function (result) { console.log(result); });
+  });
+</script>
