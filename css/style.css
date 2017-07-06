@@ -153,12 +153,28 @@ footer a {
   #main {
     width: 80%;
   }
+}
 
-  #full-nav {
-    display: none;
+@media (max-width: 850px) {
+  #main {
+    width: 90%;
   }
+}
 
-  #menu-nav {
-    display: block;
+@media (max-width: 425px) {
+  #main {
+    width: 95%;
+  }
+}
+
+@media (max-width: 375px) {
+  #main {
+    width: 100%;
+  }
+}
+
+@media (max-height: 550px) {
+  #logo {
+    max-width: 250px;
   }
 }
