@@ -12,6 +12,11 @@ id: tools
         <input type="submit" value="Search">
       </form>
     </div>
+    <div id="result" class="hidden">
+      <p>
+        The Anime <span id="title-anime"></span> has the unique IRI <a id="foundIRI"></a>.
+      </p>
+    </div>
   </div>
 </div>
 
@@ -21,10 +26,71 @@ id: tools
     let url = document.querySelector("#url").value;
     console.log(url);
 
-    let fragmentsClient = window.ldf.FragmentsClient('{{site.tpfurl}}/2017-07');
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState === 4 && this.status === 200) {
+        let store = N3.Store();
+        let parser = N3.Parser();
+        parser.parse(this.responseText, function(error, triple){
+          if (triple) {
+            store.addTriple(triple.subject, triple.predicate, triple.object);
+          } else {
+            let result = store.getTriples(null, null, `"${url}"^^http://schema.org/URL`);
 
-    let query = `SELECT * { ?s ?p "${url}"^^<http://schema.org/URL>} LIMIT 100`,
-      results = new ldf.SparqlIterator(query, { fragmentsClient: fragmentsClient });
-    results.on('data', function (result) { console.log(result); });
+            if (result.length > 0) {
+              document.querySelector("#result").classList.remove('hidden');
+              let a = document.querySelector("#foundIRI");
+              a.innerHTML = result[0].subject;
+              a.setAttribute('href', result[0].subject);
+
+              let xhttpName = new XMLHttpRequest();
+
+              xhttpName.onreadystatechange = function() {
+                if (this.readyState === 4 && this.status === 200) {
+                  let store = N3.Store();
+                  let parser = N3.Parser();
+                  parser.parse(this.responseText, function (error, triple) {
+                    if (triple) {
+                      store.addTriple(triple.subject, triple.predicate, triple.object);
+                    } else {
+                      let titles = store.getTriples(result[0].subject, 'http://schema.org/name', null).map(a => a.object);
+
+                      let title;
+                      let titleNoLanguage;
+
+                      titles.forEach(n => {
+                        if (N3.Util.getLiteralLanguage(n) === 'en') {
+                          title = n;
+                        }
+
+                        if (N3.Util.getLiteralLanguage(n) === '') {
+                          titleNoLanguage = n;
+                        }
+                      });
+
+                      if (!title && titleNoLanguage) {
+                        title = N3.Util.getLiteralValue(titleNoLanguage);
+                      } else if (title) {
+                        title = N3.Util.getLiteralValue(title);
+                      }
+
+                      document.querySelector("#title-anime").innerHTML = title;
+                    }
+                  });
+                }
+              };
+
+              xhttpName.open("GET", `https://data.betweenourworlds.org/2017-07?predicate=` + encodeURI('http://schema.org/name') + `&subject=` + encodeURI(encodeURI(result[0].subject)), true);
+              xhttpName.setRequestHeader("Accept", "text/turtle");
+              xhttpName.send();
+            }
+          }
+        });
+      }
+    };
+
+    xhttp.open("GET", `https://data.betweenourworlds.org/2017-07?predicate=` + encodeURI('http://schema.org/mainEntityOfPage') + `&object=` + encodeURI(`"${url}"^^http://schema.org/URL`), true);
+    xhttp.setRequestHeader("Accept", "text/turtle");
+    xhttp.send();
   });
 </script>

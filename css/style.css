@@ -193,3 +193,7 @@ input[type=submit]:hover {
     max-width: 250px;
   }
 }
+
+#result {
+  padding-top: 20px;
+}
