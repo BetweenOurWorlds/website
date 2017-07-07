@@ -197,3 +197,9 @@ input[type=submit]:hover {
 #result, #no-result {
   padding-top: 20px;
 }
+
+textarea {
+  width: 100%;
+  font-family: monospace;
+  font-size: 14px;
+}

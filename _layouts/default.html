@@ -11,8 +11,9 @@
     <link rel="stylesheet" property="http://www.w3.org/ns/oa#styledBy" resource="{{site.url}}/github-markdown.css" href="{{site.url}}/css/github-markdown.css" typeof="http://www.w3.org/ns/oa#CssStyle">
     <link rel="stylesheet" property="http://www.w3.org/ns/oa#styledBy" resource="{{site.url}}/style.css" href="{{site.url}}/css/style.css" typeof="http://www.w3.org/ns/oa#CssStyle">
 
-    <script src="{{site.url}}/js/ldf-client.js"></script>
-    <script src="{{site.url}}/js/n3.min.js"></script>
+    {% for j in page.js %}
+    <script src="{{site.url}}/js/{{j}}.js"></script>
+    {% endfor %}
   </head>
   <body>
     <span class="hidden" property="lastReviewed dateModified" datatype="Date">{{site.time | date_to_xmlschema}}</span>
@@ -29,7 +30,7 @@
             <ul>
               <!-- <li {% if page.id == "usecases" %} class="selected" {% endif %}><a href="/usecases">use cases</a></li> -->
               <li {% if page.id == "data" %} class="selected" {% endif %}><a href="/data">data</a></li>
-              <!-- <li {% if page.id == "tools" %} class="selected" {% endif %}><a href="/tools">tools</a></li> -->
+              <li {% if page.id == "tools" %} class="selected" {% endif %}><a href="/tools">tools</a></li>
               <li {% if page.id == "join" %} class="selected" {% endif %}><a href="/join">join</a></li>
             </ul>
           </div>

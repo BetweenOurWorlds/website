@@ -1,11 +1,16 @@
 ---
 layout: default
 id: tools
+js: [ldf-client, tools, n3]
 ---
 <div>
   <h2>Tools</h2>
 
   <div id="tools" class="text">
+    <p>
+      This page includes some tools that use our dataset.
+      They might also serve as examples for when you want to play with the data.
+    </p>
     <div id="reverse-lookup">
       <h3>Reverse Lookup</h3>
       <p>
@@ -32,88 +37,32 @@ id: tools
         </p>
       </div>
     </div>
+
+    <div id="sparql">
+      <h3>Semantic Query</h3>
+      <p>
+        If you want to query the dataset using a semantic query,
+        then <a href="https://en.wikipedia.org/wiki/SPARQL" target="_blank">SPARQL</a> is a good option.
+        Below you can find an example query.
+        This query fetches 10 anime series, including their name and unique IRI.
+        Hit 'execute' to see the result.
+        Don't hesitate to create your own query!
+      </p>
+      <div>
+        <form id="execute">
+          <textarea cols="40" rows="10" id="query" name="query">
+PREFIX schema: <http://schema.org/>
+
+SELECT * WHERE {
+  ?iri a schema:TVSeries .
+  ?iri schema:name ?name .
+}
+LIMIT 10
+          </textarea><br/>
+          <input type="submit" value="execute">
+        </form>
+        <div id="query-result"></div>
+      </div>
+    </div>
   </div>
 </div>
-
-<script>
-  document.querySelector("#search").addEventListener("submit", function(e){
-    document.querySelector("#result").classList.add('hidden');
-    document.querySelector("#no-result").classList.add('hidden');
-
-    e.preventDefault();
-    let url = document.querySelector("#url").value;
-    console.log(url);
-
-    let xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-      if (this.readyState === 4 && this.status === 200) {
-        let store = N3.Store();
-        let parser = N3.Parser();
-        parser.parse(this.responseText, function(error, triple){
-          if (triple) {
-            store.addTriple(triple.subject, triple.predicate, triple.object);
-          } else {
-            let result = store.getTriples(null, null, `"${url}"^^http://schema.org/URL`);
-
-            if (result.length > 0) {
-              document.querySelector("#result").classList.remove('hidden');
-              let a = document.querySelector("#foundIRI");
-              a.innerHTML = result[0].subject;
-              a.setAttribute('href', result[0].subject);
-
-              let xhttpName = new XMLHttpRequest();
-
-              xhttpName.onreadystatechange = function() {
-                if (this.readyState === 4 && this.status === 200) {
-                  let store = N3.Store();
-                  let parser = N3.Parser();
-                  parser.parse(this.responseText, function (error, triple) {
-                    if (triple) {
-                      store.addTriple(triple.subject, triple.predicate, triple.object);
-                    } else {
-                      let titles = store.getTriples(result[0].subject, 'http://schema.org/name', null).map(a => a.object);
-
-                      let title;
-                      let titleNoLanguage;
-
-                      titles.forEach(n => {
-                        if (N3.Util.getLiteralLanguage(n) === 'en') {
-                          title = n;
-                        }
-
-                        if (N3.Util.getLiteralLanguage(n) === '') {
-                          titleNoLanguage = n;
-                        }
-                      });
-
-                      if (!title && titleNoLanguage) {
-                        title = N3.Util.getLiteralValue(titleNoLanguage);
-                      } else if (title) {
-                        title = N3.Util.getLiteralValue(title);
-                      }
-
-                      document.querySelector("#title-anime").innerHTML = title;
-                    }
-                  });
-                }
-              };
-
-              xhttpName.open("GET", `https://data.betweenourworlds.org/2017-07?predicate=` + encodeURI('http://schema.org/name') + `&subject=` + encodeURI(encodeURI(result[0].subject)), true);
-              xhttpName.setRequestHeader("Accept", "text/turtle");
-              xhttpName.send();
-            } else {
-              document.querySelector("#no-result").classList.remove('hidden');
-              let a = document.querySelector("#sorry-url");
-              a.innerHTML = url
-              a.setAttribute('href', url);
-            }
-          }
-        });
-      }
-    };
-
-    xhttp.open("GET", `https://data.betweenourworlds.org/2017-07?predicate=` + encodeURI('http://schema.org/mainEntityOfPage') + `&object=` + encodeURI(`"${url}"^^http://schema.org/URL`), true);
-    xhttp.setRequestHeader("Accept", "text/turtle");
-    xhttp.send();
-  });
-</script>
