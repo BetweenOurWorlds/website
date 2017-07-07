@@ -194,6 +194,6 @@ input[type=submit]:hover {
   }
 }
 
-#result {
+#result, #no-result {
   padding-top: 20px;
 }

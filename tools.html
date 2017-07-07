@@ -6,22 +6,40 @@ id: tools
   <h2>Tools</h2>
 
   <div id="tools" class="text">
-    <div>
-      <form id="search">
-        <input id="url" type="url" name="url" placeholder="https://kitsu.io/anime/one-piece" autofocus required>
-        <input type="submit" value="Search">
-      </form>
-    </div>
-    <div id="result" class="hidden">
+    <div id="reverse-lookup">
+      <h3>Reverse Lookup</h3>
       <p>
-        The Anime <span id="title-anime"></span> has the unique IRI <a id="foundIRI"></a>.
+        If you have an anime's URL of a specific platform,
+        such as <a target="_blank" href="https://kitsu.io">Kitsu</a>,
+        you can use the following search feature to get the unique IRI of that anime.
+        For example, paste Kitsu's URL for the anime 'One Piece' <a target="_blank" href="https://kitsu.io/anime/one-piece">https://kitsu.io/anime/one-piece</a>
+        in the box below and hit 'Search'.
       </p>
+      <div>
+        <form id="search">
+          <input id="url" type="url" name="url" placeholder="https://kitsu.io/anime/one-piece" autofocus required>
+          <input type="submit" value="Search">
+        </form>
+      </div>
+      <div id="result" class="hidden">
+        <p>
+          The anime '<span id="title-anime"></span>' has the unique IRI <a id="foundIRI"></a>.
+        </p>
+      </div>
+      <div id="no-result" class="hidden">
+        <p>
+          Sorry, no anime was found for the URL <a target="_blank" id="sorry-url"></a>.
+        </p>
+      </div>
     </div>
   </div>
 </div>
 
 <script>
   document.querySelector("#search").addEventListener("submit", function(e){
+    document.querySelector("#result").classList.add('hidden');
+    document.querySelector("#no-result").classList.add('hidden');
+
     e.preventDefault();
     let url = document.querySelector("#url").value;
     console.log(url);
@@ -83,6 +101,11 @@ id: tools
               xhttpName.open("GET", `https://data.betweenourworlds.org/2017-07?predicate=` + encodeURI('http://schema.org/name') + `&subject=` + encodeURI(encodeURI(result[0].subject)), true);
               xhttpName.setRequestHeader("Accept", "text/turtle");
               xhttpName.send();
+            } else {
+              document.querySelector("#no-result").classList.remove('hidden');
+              let a = document.querySelector("#sorry-url");
+              a.innerHTML = url
+              a.setAttribute('href', url);
             }
           }
         });
