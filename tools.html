@@ -11,14 +11,44 @@ js: [ldf-client, tools, n3]
       This page includes some tools that use our dataset.
       They might also serve as examples for when you want to play with the data.
     </p>
+    <div id="sparql">
+      <h3>Semantic Query</h3>
+      <p>
+        If you want to query the dataset using a semantic query,
+        then <a href="https://en.wikipedia.org/wiki/SPARQL" target="_blank">SPARQL</a> is a good option.
+        Below you can find an example query.
+        This query fetches 10 anime series, including their English name and unique IRI.
+        Hit 'execute' to see the result.
+        <span class="speach">Pssst! Don't hesitate to create your own query!</span>
+      </p>
+      <div>
+        <form id="execute">
+          <textarea cols="40" rows="10" id="query" name="query">
+PREFIX schema: <http://schema.org/>
+
+SELECT * WHERE {
+  ?iri a schema:TVSeries .
+  ?iri schema:name ?name .
+
+  FILTER (lang(?name) = 'en')
+}
+LIMIT 10
+          </textarea><br/>
+          <input type="submit" value="execute">
+        </form>
+        <div id="query-result"></div>
+      </div>
+    </div>
+
     <div id="reverse-lookup">
       <h3>Reverse Lookup</h3>
       <p>
         If you have an anime's URL of a specific platform,
         such as <a target="_blank" href="https://kitsu.io">Kitsu</a>,
         you can use the following search feature to get the unique IRI of that anime.
-        For example, paste Kitsu's URL for the anime 'One Piece' <a target="_blank" href="https://kitsu.io/anime/one-piece">https://kitsu.io/anime/one-piece</a>
+        For example, paste Kitsu's URL (<a target="_blank" href="https://kitsu.io/anime/one-piece">https://kitsu.io/anime/one-piece</a>) for the anime 'One Piece'
         in the box below and hit 'Search'.
+        Under the hood we use a SPARQL query, similar to the one used above.
       </p>
       <div>
         <form id="search">
@@ -35,33 +65,6 @@ js: [ldf-client, tools, n3]
         <p>
           Sorry, no anime was found for the URL <a target="_blank" id="sorry-url"></a>.
         </p>
-      </div>
-    </div>
-
-    <div id="sparql">
-      <h3>Semantic Query</h3>
-      <p>
-        If you want to query the dataset using a semantic query,
-        then <a href="https://en.wikipedia.org/wiki/SPARQL" target="_blank">SPARQL</a> is a good option.
-        Below you can find an example query.
-        This query fetches 10 anime series, including their name and unique IRI.
-        Hit 'execute' to see the result.
-        Don't hesitate to create your own query!
-      </p>
-      <div>
-        <form id="execute">
-          <textarea cols="40" rows="10" id="query" name="query">
-PREFIX schema: <http://schema.org/>
-
-SELECT * WHERE {
-  ?iri a schema:TVSeries .
-  ?iri schema:name ?name .
-}
-LIMIT 10
-          </textarea><br/>
-          <input type="submit" value="execute">
-        </form>
-        <div id="query-result"></div>
       </div>
     </div>
   </div>

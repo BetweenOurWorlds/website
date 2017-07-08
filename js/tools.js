@@ -59,12 +59,53 @@ window.onload = () => {
 
     let query = document.querySelector('#query').value;
     let fragmentsClient = window.ldf.FragmentsClient('https://data.betweenourworlds.org/2017-07');
-    let results = new ldf.SparqlIterator(query, { fragmentsClient: fragmentsClient });
     let output = document.querySelector('#query-result');
     output.innerHTML = "";
 
-    results.on('data', result => {
-      console.log(result);
-    });
+    try {
+      let results = new ldf.SparqlIterator(query, { fragmentsClient: fragmentsClient });
+      let keys;
+
+      results.on('data', result => {
+        if (output.innerHTML === "") {
+          //no table is there yet, let's create a new one
+          let table = '<table id="query-table"><thead><tr>';
+          keys = Object.keys(result);
+
+          keys.forEach(k => {
+            table += `<th>${k}</th>`;
+          });
+
+          table += '</tr></thead><tbody></tbody></table>';
+          output.innerHTML = table;
+        }
+
+        let table = document.querySelector('#query-table');
+        let row = table.insertRow(-1);
+
+        keys.forEach(k => {
+          let value = result[k];
+          let cell = row.insertCell(-1);
+
+          if (N3.Util.isLiteral(value)) {
+            value = N3.Util.getLiteralValue(value);
+          } else {
+            value = `<a href="${value}">${value}</a>`;
+          }
+
+          cell.innerHTML = value;
+        });
+      });
+
+      results.on('end', () => {
+        if (!keys) {
+          output.innerHTML = "Sorry, no results were found for your query. Please try another one."
+        }
+      });
+    } catch (e) {
+      if (e.name === 'InvalidQueryError') {
+        output.innerHTML = `Sorry, your query seems to be invalid: ${e.message}.`
+      }
+    }
   });
 };
