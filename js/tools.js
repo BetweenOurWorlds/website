@@ -69,7 +69,7 @@ window.onload = () => {
       results.on('data', result => {
         if (output.innerHTML === "") {
           //no table is there yet, let's create a new one
-          let table = '<table id="query-table"><thead><tr>';
+          let table = '<table id="query-table" class="console"><thead><tr>';
           keys = Object.keys(result);
 
           keys.forEach(k => {
@@ -104,7 +104,7 @@ window.onload = () => {
       });
     } catch (e) {
       if (e.name === 'InvalidQueryError') {
-        output.innerHTML = `Sorry, your query seems to be invalid: ${e.message}.`
+        output.innerHTML = `Sorry, your query seems to be invalid: <span class="console">${e.message}</span>.`
       }
     }
   });

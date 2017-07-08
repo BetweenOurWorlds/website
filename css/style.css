@@ -200,17 +200,18 @@ input[type=submit]:hover {
 
 textarea {
   width: 100%;
-  font-family: monospace;
-  font-size: 14px;
 }
 
 #query-result {
   width: 100%;
   padding-top: 20px;
-  font-family: monospace;
-  font-size: 14px;
 }
 
 #query-table {
   width: 100%;
+}
+
+.console {
+  font-family: monospace;
+  font-size: 14px;
 }
