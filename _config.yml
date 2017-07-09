@@ -4,6 +4,7 @@ webid: "https://betweenourworlds.org/#org"
 datadumpurl: "https://datadump.betweenourworlds.org"
 tpfurl: "https://data.betweenourworlds.org"
 description: "Between Our Worlds is an initiative to provide metadata information about anime as Linked Open Data."
+title: Between Our Worlds
 
 permalink: pretty
 markdown: kramdown
