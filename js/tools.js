@@ -13,7 +13,8 @@ window.onload = () => {
     let fragmentsClient = window.ldf.FragmentsClient('https://data.betweenourworlds.org/2017-07');
 
     let query = `SELECT * {
-      ?s <http://schema.org/mainEntityOfPage> "${url}"^^<http://schema.org/URL>.
+      OPTIONAL {?s <http://schema.org/mainEntityOfPage> "${url}"^^<http://schema.org/URL>.}
+      OPTIONAL {?s <http://schema.org/mainEntityOfPage> "${url}".}
       ?s <http://schema.org/name> ?name.
     } LIMIT 100`,
       results = new ldf.SparqlIterator(query, { fragmentsClient: fragmentsClient });
