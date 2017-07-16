@@ -24,15 +24,8 @@ window.onload = () => {
 };
 
 function fillPage(store) {
-  let ont = store.getTriples(null, 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type', 'http://www.w3.org/2002/07/owl#Ontology')[0].subject;
-
-  //set title
-  let title = store.getTriples(ont, 'http://www.w3.org/2000/01/rdf-schema#label', null)[0].object;
-  document.querySelector('#ont-title').innerHTML = N3.Util.getLiteralValue(title);
-
-  //set description
-  let description = store.getTriples(ont, 'http://www.w3.org/2000/01/rdf-schema#comment', null)[0].object;
-  document.querySelector('#description').innerHTML = N3.Util.getLiteralValue(description);
+  //add information about the ontology: title, descriptions, and so on
+  addGlobalInfo(store);
 
   //add classes
   let classes = store.getTriples(null, 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type', 'http://www.w3.org/2000/01/rdf-schema#Class').map(a => a.subject);
@@ -43,6 +36,38 @@ function fillPage(store) {
   let properties = store.getTriples(null, 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type', 'http://www.w3.org/2002/07/owl#ObjectProperty').map(a => a.subject);
   let propDiv = document.querySelector('#objectproperties');
   createTable(properties, propDiv, store);
+}
+
+function addGlobalInfo(store) {
+  let ont = store.getTriples(null, 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type', 'http://www.w3.org/2002/07/owl#Ontology')[0].subject;
+
+  let elements = [{
+      id: '#ont-title',
+      iri: 'http://www.w3.org/2000/01/rdf-schema#label'
+    },{
+      id: '#description',
+      iri: 'http://www.w3.org/2000/01/rdf-schema#comment'
+    },{
+      id: '#ns',
+      iri: 'http://purl.org/vocab/vann/preferredNamespaceUri'
+    },{
+      id: '#prefix',
+      iri: 'http://purl.org/vocab/vann/preferredNamespacePrefix'
+    },{
+      id: '#version',
+      iri: 'http://www.w3.org/2002/07/owl#versionInfo'
+    },{
+      id: '#dateCreated',
+      iri: 'http://schema.org/dateCreated'
+    },{
+      id: '#dateModified',
+      iri: 'http://schema.org/dateModified'
+    }
+  ]
+
+  elements.forEach(e => {
+    setLiteralValueInElement(store, ont, e.iri, e.id);
+  });
 }
 
 function createTable(elements, mainDiv, store) {
@@ -108,4 +133,9 @@ function addRowToTable(store, tbody, c, label, iri) {
 
     tbody.appendChild(tr);
   }
+}
+
+function setLiteralValueInElement(store, subject, iri, id) {
+  let value = store.getTriples(subject, iri, null)[0].object;
+  document.querySelector(id).innerHTML = N3.Util.getLiteralValue(value);
 }
