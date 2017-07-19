@@ -1,3 +1,5 @@
+let worker = new Worker("../js/search-worker.js");
+
 window.onload = () => {
   window.ldf.Logger.setLevel('error');
   document.querySelector("#search").addEventListener("submit", function(e){
@@ -13,8 +15,9 @@ window.onload = () => {
     let fragmentsClient = window.ldf.FragmentsClient('https://data.betweenourworlds.org/2017-07');
 
     let query = `SELECT * {
-      OPTIONAL {?s <http://schema.org/mainEntityOfPage> "${url}"^^<http://schema.org/URL>.}
-      OPTIONAL {?s <http://schema.org/mainEntityOfPage> "${url}".}
+      {?s <http://schema.org/mainEntityOfPage> "${url}"^^<http://schema.org/URL>.}
+      UNION
+      {?s <http://schema.org/mainEntityOfPage> "${url}".}
       ?s <http://schema.org/name> ?name.
     } LIMIT 100`,
       results = new ldf.SparqlIterator(query, { fragmentsClient: fragmentsClient });
@@ -55,6 +58,7 @@ window.onload = () => {
         }
       });
   });
+
   document.querySelector("#execute").addEventListener("submit", e => {
     e.preventDefault();
 
@@ -109,4 +113,59 @@ window.onload = () => {
       }
     }
   });
+
+  prepareSearch();
+
+  worker.onmessage = (e) => {
+    let output = document.querySelector('#search-result');
+    let title = document.querySelector('#wanted-title').value;
+    let results = e.data;
+
+    if (results.length > 0) {
+      //no table is there yet, let's create a new one
+      let table = '<table id="search-result-table" class="console"><thead><tr>';
+      table += `<th>title</th><th>iri</th>`;
+
+      table += '</tr></thead><tbody></tbody></table>';
+      output.innerHTML = table;
+
+      table = document.querySelector('#search-result-table');
+
+      for (let i = 0; i < results.length && i < 10; i ++) {
+        let result = results[i];
+        let row = table.insertRow(-1);
+        let cell = row.insertCell(-1);
+        cell.innerHTML = result.doc.title;
+
+        cell = row.insertCell(-1);
+        let iri = result.doc.iri;
+        cell.innerHTML = `<a href="${iri}">${iri}</a>`;
+      }
+    } else {
+      output.innerHTML = `Sorry, no anime was found for '${title}'.`;
+    }
+  }
+
+  document.querySelector("#search-title-form").addEventListener("submit", e => {
+    e.preventDefault();
+
+    let title = document.querySelector('#wanted-title').value;
+
+    worker.postMessage({type: "search", title});
+  });
 };
+
+function prepareSearch() {
+  let xhttp = new XMLHttpRequest();
+
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+       let parsedData = JSON.parse(this.responseText);
+
+       worker.postMessage({type: 'init', parsedData});
+    }
+  };
+
+  xhttp.open("GET", "titles.json", true);
+  xhttp.send();
+}

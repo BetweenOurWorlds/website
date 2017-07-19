@@ -149,7 +149,7 @@ footer a {
   display: none;
 }
 
-input[type=url] {
+input[type=url], input[type=text] {
   width: 90%;
 }
 
@@ -202,7 +202,7 @@ textarea {
   width: 100%;
 }
 
-#query-result {
+#query-result, #search-result {
   width: 100%;
   padding-top: 20px;
 }

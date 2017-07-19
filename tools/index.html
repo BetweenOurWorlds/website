@@ -1,0 +1,101 @@
+---
+layout: default
+id: tools
+js: [ldf-client, tools, n3, elasticlunr]
+---
+<div>
+  <h2>Tools</h2>
+
+  <div id="tools" class="text">
+    <p>
+      This page includes tools that use our dataset.
+      They might also serve as examples for when you want to play with the data yourself.
+    </p>
+    <div id="sparql">
+      <h3>Semantic Query</h3>
+      <p>
+        If you want to query the dataset using a semantic query,
+        then <a href="https://en.wikipedia.org/wiki/SPARQL" target="_blank">SPARQL</a> is a good option.
+        Below you can find an example query.
+        This query fetches 10 anime series, including their English name and unique IRI.
+        Hit 'execute' to see the result.
+        <span class="speach">Pssst! Don't hesitate to create your own query!</span>
+      </p>
+      <div>
+        <form id="execute">
+          <textarea class="console" cols="40" rows="10" id="query" name="query">
+PREFIX schema: <http://schema.org/>
+
+SELECT * WHERE {
+  ?iri a schema:TVSeries .
+  ?iri schema:name ?name .
+
+  FILTER (lang(?name) = 'en')
+}
+LIMIT 10
+          </textarea><br/>
+          <input type="submit" value="Execute">
+        </form>
+        <div id="query-result"></div>
+      </div>
+    </div>
+
+    <div id="search-title">
+      <h3>Search</h3>
+      <p>
+        When you want to use the unique IRI of an anime, you need to know it.
+        With the search feature below, you can find that IRI via the anime's title.
+        For example, type 'Naruto' in the box below and hit 'Search'.
+        Under the hood we use <a href="http://elasticlunr.com" target="_blank">Elasticlunr.js</a> to facilate the search functionality.
+      </p>
+      <div>
+        <form id="search-title-form">
+          <input id="wanted-title" type="text" name="url" placeholder="title of an anime" required>
+          <input type="submit" value="Search">
+        </form>
+      </div>
+      <div id="search-result"></div>
+    </div>
+
+    <div id="reverse-lookup">
+      <h3>Reverse Lookup</h3>
+      <p>
+        If you have an anime's URL of a specific platform,
+        such as <a target="_blank" href="https://kitsu.io">Kitsu</a>,
+        you can use the following search feature to get the unique IRI of that anime.
+        For example, paste Kitsu's URL (<a target="_blank" href="https://kitsu.io/anime/one-piece">https://kitsu.io/anime/one-piece</a>) for the anime 'One Piece'
+        in the box below and hit 'Search'.
+        Under the hood we use a SPARQL query, similar to the one used above.
+      </p>
+      <div>
+        <form id="search">
+          <input id="url" type="url" name="url" placeholder="link from an anime website" required>
+          <input type="submit" value="Search">
+        </form>
+      </div>
+      <div id="result" class="hidden">
+        <p>
+          The anime '<span id="title-anime"></span>' has the unique IRI <a id="foundIRI"></a>.
+        </p>
+      </div>
+      <div id="no-result" class="hidden">
+        <p>
+          Sorry, no anime was found for the URL <a target="_blank" id="sorry-url"></a>.
+        </p>
+      </div>
+    </div>
+
+    <div id="more">
+      <h3>More</h3>
+      <p>
+        Below is a list of applications, demos, and examples created by others that use our dataset.
+      </p>
+
+      <ul>
+        <li><a target="_blank" href="https://pieterheyvaert.com/anime-timeline">Anime Timeline</a>: a timeline showing the different anime based on their start and end date.</li>
+        <li><a target="_blank" href="https://pieterheyvaert.com/banri">Anime Chatbot</a>: a very basic chatbot using <a target="_blank" href="https://botui.org">BotUI</a>.</li>
+        <li><span class="speach">Did you develop something that uses our data? Let us know and we will add you to the list!</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
