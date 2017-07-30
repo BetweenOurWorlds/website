@@ -215,3 +215,11 @@ textarea {
   font-family: monospace;
   font-size: 14px;
 }
+
+table.ont-element {
+  padding-top: 10px;
+}
+
+span.ont-element {
+  margin-left: 10px;
+}
