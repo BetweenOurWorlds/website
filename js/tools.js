@@ -63,7 +63,7 @@ window.onload = () => {
     e.preventDefault();
 
     let query = document.querySelector('#query').value;
-    let fragmentsClient = window.ldf.FragmentsClient('https://data.betweenourworlds.org/2017-07');
+    let fragmentsClient = window.ldf.FragmentsClient('https://data.betweenourworlds.org/latest');
     let output = document.querySelector('#query-result');
     output.innerHTML = "";
 
