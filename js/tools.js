@@ -12,7 +12,7 @@ window.onload = () => {
     let title;
     let titleNoLanguage;
 
-    let fragmentsClient = window.ldf.FragmentsClient('https://data.betweenourworlds.org/2017-07');
+    let fragmentsClient = window.ldf.FragmentsClient('https://data.betweenourworlds.org/latest');
 
     let query = `SELECT * {
       {?s <http://schema.org/mainEntityOfPage> "${url}"^^<http://schema.org/URL>.}
