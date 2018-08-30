@@ -18,9 +18,9 @@ b: a owl:Ontology, voaf:Vocabulary, schema:Thing, schema:CreativeWork;
     dct:creator                   <https://betweenourworlds.org/#bow>;
     schema:dateCreated            "2017-07-14"^^schema:date;
     dct:issued                    "2017-07-14"^^xsd:date;
-    schema:dateModified           "2017-07-16"^^schema:date;
-    dct:modified                  "2017-07-16"^^xsd:date;
-    owl:versionInfo               "1.0"^^xsd:decimal;
+    schema:dateModified           "2018-08-30"^^schema:date;
+    dct:modified                  "2018-08-30"^^xsd:date;
+    owl:versionInfo               "1.1"^^xsd:decimal;
     vann:preferredNamespacePrefix "bow";
     vann:preferredNamespaceUri    "https://betweenourworlds.org/ontology/".
 
@@ -28,6 +28,12 @@ bow:Stream a rdfs:Class ;
     rdfs:label       "Stream" ;
     rdfs:comment     "The stream of an anime by a streaming service." ;
     rdfs:subClassOf  schema:Thing ;
+    rdfs:isDefinedBy b: .
+
+bow:Character a rdfs:Class ;
+    rdfs:label       "Character";
+    rdfs:comment     "A character that appears in an anime.";
+    rdfs:subClassOf  schema:Thing;
     rdfs:isDefinedBy b: .
 
 bow:object a owl:ObjectProperty ;
