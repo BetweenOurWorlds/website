@@ -11,57 +11,29 @@ id: data
     We schedule a new release of the dataset every month, which includes the updates of the metadata provided by the <a target="_blank" href="http://docs.kitsu.apiary.io">Kitsu API</a>.
 
     <h3 id="datadump">Datadump</h3>
-    <p>
+    <p xmlns:schema="http://schema.org/">
       The latest and all previous datadumps are available below
       in the <a target="_blank" href="http://www.rdfhdt.org/">HDT</a> format.
       They do not contain the <a href="{{site.url}}/ontology">ontology</a> and <a href="https://data.betweenourworlds.org/actionstatus">action status</a> triples.
 
       <ul>
-	<li>
-          <a href="{{site.datadumpurl}}/2018-09.hdt">2018-09 (latest)</a>
-        </li>
-        <li>
-          <a href="{{site.datadumpurl}}/2018-08.hdt">2018-08</a>
-        </li>
-        <li>
-          <a href="{{site.datadumpurl}}/2018-07.hdt">2018-07</a>
-        </li>
-        <li>
-          <a href="{{site.datadumpurl}}/2018-06.hdt">2018-06</a>
-        </li>
-        <li>
-          <a href="{{site.datadumpurl}}/2018-05.hdt">2018-05</a>
-        </li>
-        <li>
-          <a href="{{site.datadumpurl}}/2018-04.hdt">2018-04</a>
-        </li>
-        <li>
-          <a href="{{site.datadumpurl}}/2018-03.hdt">2018-03</a>
-        </li>
-        <li>
-          <a href="{{site.datadumpurl}}/2018-02.hdt">2018-02</a>
-        </li>
-        <li>
-          <a href="{{site.datadumpurl}}/2018-01.hdt">2018-01</a>
-        </li>
-        <li>
-          <a href="{{site.datadumpurl}}/2017-12.hdt">2017-12</a>
-        </li>
-        <li>
-          <a href="{{site.datadumpurl}}/2017-11.hdt">2017-11</a>
-        </li>
-        <li>
-          <a href="{{site.datadumpurl}}/2017-10.hdt">2017-10</a>
-        </li>
-        <li>
-          <a href="{{site.datadumpurl}}/2017-09.hdt">2017-09</a>
-        </li>
-        <li>
-          <a href="{{site.datadumpurl}}/2017-08.hdt">2017-08</a>
-        </li>
-        <li>
-          <a href="{{site.datadumpurl}}/2017-07.hdt">2017-07</a>
-        </li>
+        {% for dataset in site.data.datasets %}
+          <li typeof="schema:Dataset">
+            <a href="{{site.datadumpurl}}/{{dataset.slug}}.hdt"><span property="schema:name">{{dataset.name}}</span></a>
+            <span property="schema:description" class="hidden">{{dataset.name}} release of the Between Our Worlds dataset.</span>
+            <span property="schema:keywords" class="hidden">anime,episode,season,metadata,character,trailer,stream</span>
+            <span property="schema:version" class="hidden">1</span>
+            <span property="schema:url" class="hidden">{{site.url}}/data</span>
+            {% if dataset.latest %}
+            (latest)
+            {% endif %}
+
+            <div class="hidden" typeof="schema:DataDownload" property="schema:distribution">
+              <span property="schema:contentUrl">{{site.datadumpurl}}/{{dataset.slug}}.hdt</span>
+              <span property="schema:fileFormat">application/vnd.hdt</span>
+            </div>
+          </li>
+        {% endfor %}
       </ul>
     </p>
 
