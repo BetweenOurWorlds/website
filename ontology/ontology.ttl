@@ -14,13 +14,15 @@ b: a owl:Ontology, voaf:Vocabulary, schema:Thing, schema:CreativeWork;
     dct:title                     "Between Our Worlds Ontology"@en;
     rdfs:comment                  "The ontology focusses on the concepts of Anime."@en;
     dct:description               "The ontology focusses on the concepts of Anime."@en;
+    rdfs:comment                  "De ontology focust op de concepten van Anime."@nl;
+    dct:description               "De ontology focust op de concepten van Anime."@nl;
     schema:creator                <https://betweenourworlds.org/#bow>;
     dct:creator                   <https://betweenourworlds.org/#bow>;
     schema:dateCreated            "2017-07-14"^^schema:date;
     dct:issued                    "2017-07-14"^^xsd:date;
-    schema:dateModified           "2018-08-30"^^schema:date;
-    dct:modified                  "2018-08-30"^^xsd:date;
-    owl:versionInfo               "1.1"^^xsd:decimal;
+    schema:dateModified           "2018-09-27"^^schema:date;
+    dct:modified                  "2018-09-27"^^xsd:date;
+    owl:versionInfo               "1.2"^^xsd:decimal;
     vann:preferredNamespacePrefix "bow";
     vann:preferredNamespaceUri    "https://betweenourworlds.org/ontology/".
 
@@ -53,4 +55,10 @@ bow:provides a owl:ObjectProperty ;
     rdfs:comment     "Refers to the stream, i.e., the streaming of an anime provided by a streaming service." ;
     rdfs:range       bow:Stream ;
     owl:inverseOf    bow:providedBy ;
+    rdfs:isDefinedBy b: .
+
+bow:character a owl:ObjectProperty ;
+    rdfs:label       "has character" ;
+    rdfs:comment     "Links an entity, e.g., anime, to a character that appears in it." ;
+    rdfs:range       bow:Character ;
     rdfs:isDefinedBy b: .
