@@ -17,7 +17,7 @@ window.onload = () => {
         reject(this.status);
       }
     }
-  }
+  };
 
   xhttp.open("GET", 'ontology.ttl', true);
   xhttp.send();
@@ -63,7 +63,7 @@ function addGlobalInfo(store) {
       id: '#dateModified',
       iri: 'http://schema.org/dateModified'
     }
-  ]
+  ];
 
   elements.forEach(e => {
     setLiteralValueInElement(store, ont, e.iri, e.id);
@@ -136,6 +136,19 @@ function addRowToTable(store, tbody, c, label, iri) {
 }
 
 function setLiteralValueInElement(store, subject, iri, id) {
-  let value = store.getTriples(subject, iri, null)[0].object;
+  const values = store.getTriples(subject, iri, null).map(a => a.object);
+  //we want at least one literal to show
+  let value = values[0];
+  let i = 1;
+
+  //we prefer to have the English version of the literal
+  while (i < values.length && N3.Util.getLiteralLanguage(values[i]) !== 'en') {
+    i ++;
+  }
+
+  if (i < values.length) {
+    value = values[i];
+  }
+
   document.querySelector(id).innerHTML = N3.Util.getLiteralValue(value);
 }
