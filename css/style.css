@@ -180,6 +180,10 @@ input[type=submit]:hover {
   #main {
     width: 95%;
   }
+
+  #nav li {
+    margin-right: -5px;
+  }
 }
 
 @media (max-width: 375px) {
