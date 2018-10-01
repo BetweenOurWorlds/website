@@ -10,43 +10,55 @@ id: data
     Existing ontologies are used as much as possible, but for some concepts we developed our own <a href="{{site.url}}/ontology">ontology</a>.
     We schedule a new release of the dataset every month, which includes the updates of the metadata provided by the <a target="_blank" href="http://docs.kitsu.apiary.io">Kitsu API</a>.
 
-    <h3 id="datadump">Datadump</h3>
-    <p xmlns:schema="http://schema.org/">
-      The latest and all previous datadumps are available below
-      in the <a target="_blank" href="http://www.rdfhdt.org/">HDT</a> format.
-      They do not contain the <a href="{{site.url}}/ontology">ontology</a> and <a href="https://data.betweenourworlds.org/actionstatus">action status</a> triples.
+    <div>
+      <h3 id="datadump">Datadump</h3>
+      <p xmlns:schema="http://schema.org/">
+        The latest and all previous datadumps are available below
+        in the <a target="_blank" href="http://www.rdfhdt.org/">HDT</a> format.
+        They do not contain the <a href="{{site.url}}/ontology">ontology</a> and <a href="https://data.betweenourworlds.org/actionstatus">action status</a> triples.
 
-      <ul>
-        {% for dataset in site.data.datasets %}
-          <li typeof="schema:Dataset">
-            <a href="{{site.datadumpurl}}/{{dataset.slug}}.hdt"><span property="schema:name">{{dataset.name}}</span></a>
-            <span property="schema:description" class="hidden">{{dataset.name}} release of the Between Our Worlds dataset.</span>
-            <span property="schema:keywords" class="hidden">anime,episode,season,metadata,character,trailer,stream</span>
-            <span property="schema:version" class="hidden">1</span>
-            <span property="schema:url" class="hidden">{{site.url}}/data</span>
-            <span property="schema:license" datatype="schema:URL" class="hidden">https://creativecommons.org/publicdomain/zero/1.0/</span>
+        <ul>
+          {% for dataset in site.data.datasets %}
+            <li typeof="schema:Dataset">
+              <a href="{{site.datadumpurl}}/{{dataset.slug}}.hdt"><span property="schema:name">{{dataset.name}}</span></a>
+              <span property="schema:description" class="hidden">{{dataset.name}} release of the Between Our Worlds dataset.</span>
+              <span property="schema:keywords" class="hidden">anime,episode,season,metadata,character,trailer,stream</span>
+              <span property="schema:version" class="hidden">1</span>
+              <span property="schema:url" class="hidden">{{site.url}}/data</span>
+              <span property="schema:license" datatype="schema:URL" class="hidden">https://creativecommons.org/publicdomain/zero/1.0/</span>
 
-            {% if dataset.latest %}
-            (latest)
-            {% endif %}
+              {% if dataset.latest %}
+              (latest)
+              {% endif %}
 
-            <div class="hidden" typeof="schema:DataDownload" property="schema:distribution">
-              <span property="schema:contentUrl">{{site.datadumpurl}}/{{dataset.slug}}.hdt</span>
-              <span property="schema:fileFormat">application/vnd.hdt</span>
-            </div>
-          </li>
-        {% endfor %}
-      </ul>
-    </p>
+              <div class="hidden" typeof="schema:DataDownload" property="schema:distribution">
+                <span property="schema:contentUrl">{{site.datadumpurl}}/{{dataset.slug}}.hdt</span>
+                <span property="schema:fileFormat">application/vnd.hdt</span>
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      </p>
+    </div>
 
-    <h3 id="tpf">Triple Pattern Fragments Server</h3>
-    <p>
-    The data can be queried via a <a target="_blank" href="http://linkeddatafragments.org/concept/">Triple Pattern Fragments</a> server.
-      The URL of the server is <a href="{{site.tpfurl}}">{{site.tpfurl}}</a>.
-      <span class="speach">Psssst! Visit the URL in the browser to have a quick look at the data!</span>
-      You can query the data by requesting a single fragment or
-      by using <a target="_blank" href="https://en.wikipedia.org/wiki/SPARQL">SPARQL</a> queries, which combines multiple fragments for you.
-      Several <a target="_blank" href="http://linkeddatafragments.org/software/">libraries</a> in different programming languages are available that help you with that.
-    </p>
+    <div>
+      <h3 id="tpf">Triple Pattern Fragments Server</h3>
+      <p>
+      The data can be queried via a <a target="_blank" href="http://linkeddatafragments.org/concept/">Triple Pattern Fragments</a> server.
+        The URL of the server is <a href="{{site.tpfurl}}">{{site.tpfurl}}</a>.
+        <span class="speach">Psssst! Visit the URL in the browser to have a quick look at the data!</span>
+        You can query the data by requesting a single fragment or
+        by using <a target="_blank" href="https://en.wikipedia.org/wiki/SPARQL">SPARQL</a> queries, which combines multiple fragments for you.
+        Several <a target="_blank" href="http://linkeddatafragments.org/software/">libraries</a> in different programming languages are available that help you with that.
+      </p>
+    </div>
+
+    <div>
+      <h3>License</h3>
+
+      <p>
+        This work is licensed under the <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0 Universal License</a>.
+      </p>
+    </div>
   </div>
 </div>
