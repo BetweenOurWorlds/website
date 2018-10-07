@@ -20,11 +20,13 @@ b: a owl:Ontology, voaf:Vocabulary, schema:Thing, schema:CreativeWork;
     dct:creator                   <https://betweenourworlds.org/#bow>;
     schema:dateCreated            "2017-07-14"^^schema:date;
     dct:issued                    "2017-07-14"^^xsd:date;
-    schema:dateModified           "2018-09-27"^^schema:date;
-    dct:modified                  "2018-09-27"^^xsd:date;
+    schema:dateModified           "2018-10-07"^^schema:date;
+    dct:modified                  "2018-10-07"^^xsd:date;
     owl:versionInfo               "1.2"^^xsd:decimal;
     vann:preferredNamespacePrefix "bow";
-    vann:preferredNamespaceUri    "https://betweenourworlds.org/ontology/".
+    vann:preferredNamespaceUri    "https://betweenourworlds.org/ontology/";
+    schema:license                <http://creativecommons.org/publicdomain/zero/1.0> ;
+    dct:license                   <http://creativecommons.org/publicdomain/zero/1.0> .
 
 bow:Stream a rdfs:Class ;
     rdfs:label       "Stream" ;
@@ -62,3 +64,5 @@ bow:character a owl:ObjectProperty ;
     rdfs:comment     "Links an entity, e.g., anime, to a character that appears in it." ;
     rdfs:range       bow:Character ;
     rdfs:isDefinedBy b: .
+
+<http://creativecommons.org/publicdomain/zero/1.0> rdfs:label "CC0 1.0 Universal"^^<http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral>.

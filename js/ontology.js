@@ -62,6 +62,9 @@ function addGlobalInfo(store) {
     },{
       id: '#dateModified',
       iri: 'http://schema.org/dateModified'
+    },{
+      id: '#license',
+      iri: 'http://schema.org/license'
     }
   ];
 
@@ -136,19 +139,47 @@ function addRowToTable(store, tbody, c, label, iri) {
 }
 
 function setLiteralValueInElement(store, subject, iri, id) {
-  const values = store.getTriples(subject, iri, null).map(a => a.object);
+  const literalValues = getLiteralValues(store, subject, iri);
+
   //we want at least one literal to show
-  let value = values[0];
+  let literalValue = literalValues[0];
   let i = 1;
 
   //we prefer to have the English version of the literal
-  while (i < values.length && N3.Util.getLiteralLanguage(values[i]) !== 'en') {
+  while (i < literalValues.length && N3.Util.getLiteralLanguage(literalValues[i].value) !== 'en') {
     i ++;
   }
 
-  if (i < values.length) {
-    value = values[i];
+  if (i < literalValues.length) {
+    literalValue = literalValues[i];
   }
 
-  document.querySelector(id).innerHTML = N3.Util.getLiteralValue(value);
+  let html = N3.Util.getLiteralValue(literalValue.value);
+
+  if (literalValue.link) {
+    html = `<a href="${literalValue.link}" target="_blank">${html}</a>`;
+  }
+
+  document.querySelector(id).innerHTML = html;
+}
+
+function getLiteralValues(store, subject, iri) {
+  const values = store.getTriples(subject, iri, null).map(a => a.object);
+  let literalValues = [];
+
+  for (const value of values) {
+    if (N3.Util.isLiteral(value)) {
+      literalValues.push({value});
+    } else {
+      const temp = getLiteralValues(store, value, 'http://www.w3.org/2000/01/rdf-schema#label');
+
+      temp.forEach(t => {
+        t.link = value;
+      });
+
+      literalValues = literalValues.concat(temp);
+    }
+  }
+
+  return literalValues;
 }
