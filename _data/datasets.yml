@@ -1,6 +1,12 @@
+- name: December 2018
+  slug: 2018-12
+  latest: yes
+- name: November 2018
+  slug: 2018-11
+  latest: no
 - name: October 2018
   slug: 2018-10
-  latest: yes
+  latest: no
 - name: September 2018
   slug: 2018-09
   latest: no
