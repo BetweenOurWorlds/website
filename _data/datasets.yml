@@ -1,6 +1,12 @@
+- name: June 2019
+  slug: 2019-06
+  latest: yes
+- name: May 2019
+  slug: 2019-05
+  latest: no
 - name: April 2019
   slug: 2019-04
-  latest: yes
+  latest: no
 - name: March 2019
   slug: 2019-03
   latest: no
