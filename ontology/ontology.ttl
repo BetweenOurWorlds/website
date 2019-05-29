@@ -12,6 +12,8 @@
 b: a owl:Ontology, voaf:Vocabulary, schema:Thing, schema:CreativeWork;
     rdfs:label                    "Between Our Worlds Ontology"@en;
     dct:title                     "Between Our Worlds Ontology"@en;
+    rdfs:label                    "Between Our Worlds Ontology"@nl;
+    dct:title                     "Between Our Worlds Ontology"@nl;
     rdfs:comment                  "The ontology focusses on the concepts of Anime."@en;
     dct:description               "The ontology focusses on the concepts of Anime."@en;
     rdfs:comment                  "De ontology focust op de concepten van Anime."@nl;
@@ -20,9 +22,9 @@ b: a owl:Ontology, voaf:Vocabulary, schema:Thing, schema:CreativeWork;
     dct:creator                   <https://betweenourworlds.org/#bow>;
     schema:dateCreated            "2017-07-14"^^schema:date;
     dct:issued                    "2017-07-14"^^xsd:date;
-    schema:dateModified           "2018-10-07"^^schema:date;
-    dct:modified                  "2018-10-07"^^xsd:date;
-    owl:versionInfo               "1.2"^^xsd:decimal;
+    schema:dateModified           "2019-05-29"^^schema:date;
+    dct:modified                  "2019-05-29"^^xsd:date;
+    owl:versionInfo               "1.3"^^xsd:decimal;
     vann:preferredNamespacePrefix "bow";
     vann:preferredNamespaceUri    "https://betweenourworlds.org/ontology/";
     schema:license                <http://creativecommons.org/publicdomain/zero/1.0> ;
@@ -63,6 +65,12 @@ bow:character a owl:ObjectProperty ;
     rdfs:label       "has character" ;
     rdfs:comment     "Links an entity, e.g., anime, to a character that appears in it." ;
     rdfs:range       bow:Character ;
+    rdfs:isDefinedBy b: .
+
+bow:topicOf a owl:DatatypeProperty ;
+    rdfs:label       "is topic of" ;
+    rdfs:comment     "Links an entity, e.g., anime, to a Web page that has the entity as topic. Not necessarily describing the entity." ;
+    rdfs:range       schema:URL ;
     rdfs:isDefinedBy b: .
 
 <http://creativecommons.org/publicdomain/zero/1.0> rdfs:label "CC0 1.0 Universal"^^<http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral>.
