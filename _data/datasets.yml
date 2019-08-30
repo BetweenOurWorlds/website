@@ -1,6 +1,9 @@
+- name: September 2019
+  slug: 2019-09
+  latest: yes
 - name: August 2019
   slug: 2019-08
-  latest: yes
+  latest: no
 - name: July 2019
   slug: 2019-07
   latest: no
