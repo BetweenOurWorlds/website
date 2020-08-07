@@ -1,4 +1,3 @@
-let worker = new Worker("../js/search-worker.js");
 
 window.onload = () => {
   window.ldf.Logger.setLevel('error');
@@ -114,12 +113,9 @@ window.onload = () => {
     }
   });
 
-  prepareSearch();
-
-  worker.onmessage = (e) => {
+  function showResults(results) {
     let output = document.querySelector('#search-result');
     let title = document.querySelector('#wanted-title').value;
-    let results = e.data;
 
     if (results.length > 0) {
       //no table is there yet, let's create a new one
@@ -132,40 +128,34 @@ window.onload = () => {
       table = document.querySelector('#search-result-table');
 
       for (let i = 0; i < results.length && i < 10; i ++) {
-        let result = results[i];
-        let row = table.insertRow(-1);
+        const result = results[i];
+        const row = table.insertRow(-1);
         let cell = row.insertCell(-1);
-        cell.innerHTML = result.doc.title;
+        cell.innerHTML = result.label;
 
         cell = row.insertCell(-1);
-        let iri = result.doc.iri;
+        const iri = result.id;
         cell.innerHTML = `<a href="${iri}">${iri}</a>`;
       }
     } else {
-      output.innerHTML = `Sorry, no anime was found for '${title}'.`;
+      output.innerHTML = `Sorry, no anime was found for "${title}".`;
     }
   }
 
   document.querySelector("#search-title-form").addEventListener("submit", e => {
     e.preventDefault();
 
-    let title = document.querySelector('#wanted-title').value;
+    const title = document.querySelector('#wanted-title').value;
+    const xhttp = new XMLHttpRequest();
 
-    worker.postMessage({type: "search", title});
+    xhttp.onreadystatechange = function() {
+      if (this.readyState === 4 && this.status === 200) {
+        const parsedData = JSON.parse(this.responseText);
+        showResults(parsedData);
+      }
+    };
+
+    xhttp.open("GET", `https://betweenourworlds.org/search?i=true&q=` + title, true);
+    xhttp.send();
   });
 };
-
-function prepareSearch() {
-  let xhttp = new XMLHttpRequest();
-
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-       let parsedData = JSON.parse(this.responseText);
-
-       worker.postMessage({type: 'init', parsedData});
-    }
-  };
-
-  xhttp.open("GET", "titles.json", true);
-  xhttp.send();
-}
