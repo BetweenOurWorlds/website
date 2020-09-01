@@ -1,0 +1,25 @@
+{
+  "name": "website",
+  "version": "1.0.0",
+  "description": "Website of Between Our Worlds",
+  "main": "index.js",
+  "scripts": {
+    "start": "./node_modules/@11ty/eleventy/cmd.js --serve",
+    "build": "./node_modules/@11ty/eleventy/cmd.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BetweenOurWorlds/website.git"
+  },
+  "author": "Pieter Heyvaert (https://pieterheyvaert.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BetweenOurWorlds/website/issues"
+  },
+  "homepage": "https://github.com/BetweenOurWorlds/website#readme",
+  "dependencies": {
+    "@11ty/eleventy": "^0.11.0",
+    "fs-extra": "^9.0.1"
+  }
+}

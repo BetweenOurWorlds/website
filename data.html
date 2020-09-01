@@ -18,7 +18,7 @@ id: data
         They do not contain the <a href="{{site.url}}/ontology">ontology</a> and <a href="https://data.betweenourworlds.org/actionstatus">action status</a> triples.
 
         <ul>
-          {% for dataset in site.data.datasets %}
+          {% for dataset in datasets %}
             <li typeof="schema:Dataset">
               <a href="{{site.datadumpurl}}/{{dataset.slug}}.hdt"><span property="schema:name">{{dataset.name}}</span></a>
               <span property="schema:description" class="hidden">{{dataset.name}} release of the Between Our Worlds dataset.</span>
@@ -27,7 +27,7 @@ id: data
               <span property="schema:url" class="hidden">{{site.url}}/data</span>
               <span property="schema:license" class="hidden" resource="http://creativecommons.org/publicdomain/zero/1.0"></span>
 
-              {% if dataset.latest %}
+              {% if dataset.latest == true %}
               (latest)
               {% endif %}
 
